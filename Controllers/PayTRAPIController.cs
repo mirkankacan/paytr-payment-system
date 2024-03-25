@@ -244,7 +244,7 @@ namespace PayTR.Controllers
             {
                 using (PayTREntities db = new PayTREntities())
                 {
-                    bool cariHareketKontrol = db.CARI_HAREKET.Any(x => x.ACIKLAMA == merchant_oid);
+                    bool cariHareketKontrol = db.CARI_HAREKET.Any(x => x.MERCHANT_OID == merchant_oid);
                     if (!cariHareketKontrol)
                     {
                         return false;
@@ -275,7 +275,7 @@ namespace PayTR.Controllers
                         {
                             CARI_KODU = odemeAsama1.CARI_KODU,
                             TARIH = DateTime.Now,
-                            ACIKLAMA = merchant_oid,
+                            MERCHANT_OID = merchant_oid,
                             BORC = totalAmountToDecimal,
                             ALACAK = 0,
                             HAREKET_TIPI = "G",
@@ -303,7 +303,7 @@ namespace PayTR.Controllers
             CARI_KAYIT cari = null;
             using (PayTREntities db = new PayTREntities())
             {
-                odeme = db.CARI_HAREKET.SingleOrDefault(x => x.ACIKLAMA == merchant_oid);
+                odeme = db.CARI_HAREKET.SingleOrDefault(x => x.MERCHANT_OID == merchant_oid);
                 cari = db.CARI_KAYIT.SingleOrDefault(x => x.CARI_KOD == odeme.CARI_KODU);
             }
             if (odeme != null && cari != null)
@@ -482,7 +482,7 @@ namespace PayTR.Controllers
                 foreach (var merchantOid in asama1Records)
                 {
                     // Check if the record exists in CARI_HAREKET
-                    bool cariHareketKontrol = db.CARI_HAREKET.Any(x => x.ACIKLAMA == merchantOid);
+                    bool cariHareketKontrol = db.CARI_HAREKET.Any(x => x.MERCHANT_OID == merchantOid);
 
                     if (!cariHareketKontrol)
                     {
