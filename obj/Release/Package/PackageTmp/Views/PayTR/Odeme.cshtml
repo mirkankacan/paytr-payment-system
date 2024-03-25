@@ -1,0 +1,326 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Styles -->
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" integrity="sha512-z/90a5SWiu4MWVelb5+ny7sAayYUfMmdXKEAbpj27PfdkamNdyI3hcjxPxkOPbrXoKIm7r9V2mElt5f1OtVhqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+}
+<style>
+   
+
+    .loader {
+        animation: rotate 1s infinite;
+        height: 50px;
+        width: 50px;
+    }
+
+        .loader:before,
+        .loader:after {
+            border-radius: 50%;
+            content: "";
+            display: block;
+            height: 20px;
+            width: 20px;
+        }
+
+        .loader:before {
+            animation: ball1 1s infinite;
+            background-color: #edf0f4;
+            box-shadow: 30px 0 0 #edf0f4;
+            margin-bottom: 10px;
+        }
+
+        .loader:after {
+            animation: ball2 1s infinite;
+            background-color: #051589;
+            box-shadow: 30px 0 0 #edf0f4;
+        }
+
+    @@keyframes rotate {
+        0% {
+            transform: rotate(0deg) scale(0.8)
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1.2)
+        }
+
+        100% {
+            transform: rotate(720deg) scale(0.8)
+        }
+    }
+
+    @@keyframes ball1 {
+        0% {
+            box-shadow: 30px 0 0 #051589;
+        }
+
+        50% {
+            box-shadow: 0 0 0 #051589;
+            margin-bottom: 0;
+            transform: translate(15px, 15px);
+        }
+
+        100% {
+            box-shadow: 30px 0 0 #051589;
+            margin-bottom: 10px;
+        }
+    }
+
+    @@keyframes ball2 {
+        0% {
+            box-shadow: 30px 0 0 #edf0f4;
+        }
+
+        50% {
+            box-shadow: 0 0 0 #edf0f4;
+            margin-top: -20px;
+            transform: translate(15px, 15px);
+        }
+
+        100% {
+            box-shadow: 30px 0 0 #edf0f4;
+            margin-top: 0;
+        }
+    }
+
+    .center {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+    .loader-container {
+        position: relative;
+        display: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loader {
+        margin: auto;
+    }
+</style>
+<!-- Scripts -->
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}
+<div class="center">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center mt-5">
+
+    <div class="conatiner-fluid content-inner mt-5 py-0">
+        <div class="row" id="cont1">
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body justify-content-center">
+                        <div class="row">
+                            <div class="col-md-12 mb-3 text-center">
+                                <img src="~/Content/izbeton.jpg" alt="İzbeton logosu" class="w-100" />
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label col-12" for="vergi_tc">Vergi Numarası / TC Kimlik No</label>
+                                <div class="input-group">
+                                    <input type="text" id="vergi_tc" value="" placeholder="Vergi numarası ya da TC kimlik no giriniz..." class="form-control" />
+                                    <button onclick="cariKontrol()" class="btn btn-info">
+                                        CARİ ARA &nbsp;&nbsp; <i class="fa-solid fa-magnifying-glass fa-beat-fade" style="--fa-animation-duration: 3s;"></i>
+                                    </button>
+                                </div>
+                                <div class="form-text" id="basic-addon4">* 10 karakter girerseniz vergi numarasına, 11 karakter girerseniz TC kimlik no'ya göre arama yapar.</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3" id="div-tutar" style="display:none;">
+                                <label class="form-label" for="tutar">Tutar (₺)</label>
+                                <input type="text" id="tutar" value="" class="form-control" placeholder="Tutar giriniz..." disabled />
+                            </div>
+
+                            <hr />
+                            <div class="col-md-12 mb-3">
+                                <button onclick="iframeOlustur()" id="btn-frame" class="btn btn-success w-100" disabled>
+                                    ÖDEME SAYFASINA GEÇ &nbsp;&nbsp;  <i class="fa-solid fa-money-check fa-flip fa-lg" style="--fa-animation-duration: 3s;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cont2" class="row" style="display:none;margin-top:-80px">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-3 text-center mt-3">
+                        <span id="cariAd" class="d-block text-center" style="font-size:1.3em" />
+                    </div>
+                </div>
+                <div class="row">
+                    <iframe id="paytriframe" name="paytriframe" title="PayTR Ödeme Sayfası" src="" frameborder="0" scrolling="auto" style="width: 100%; height: 800px; display:none"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   
+    $(document).ready(function () {
+        if (localStorage.getItem('firstLoad') === null) {
+            localStorage.setItem('firstLoad', 'true');
+           
+            $(window).on('beforeunload', function () {
+                $(window).off('beforeunload');
+                location.reload(true);
+                console.log("page hard reloaded")
+            });
+        }
+       
+        $(document).ajaxStart(function () {
+            $('.center').show();
+            $('.loader-container').show();
+        });
+
+        $(document).ajaxStop(function () {
+            $('.center').hide();
+            $('.loader-container').hide();
+        });
+        $("#vergi_tc").on("input", function () {
+            var value = $(this).val();
+            value = value.replace(/\D/g, ''); // Sadece sayıları al
+            value = value.slice(0, 11); // Maksimum 11 hane olacak şekilde kırp
+            $(this).val(value);
+        });
+        $("#tutar").on("input", function () {
+            var inputVal = $(this).val();
+            var numericVal = inputVal.replace(/\D/g, ''); // Sadece sayıları al
+            var formattedAmount = numericVal === '' ? '' : numericVal.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ₺";
+            $(this).val(formattedAmount);
+
+            // İmleci ₺ işaretinin sonuna getir
+            var inputElement = $(this)[0];
+            inputElement.setSelectionRange(formattedAmount.length - 2, formattedAmount.length - 2);
+        });
+
+        // Özel tuşlar için event engelleme
+        $("#tutar").on("keydown", function (e) {
+            // Sadece sayılar, geri silme tuşu ve ok tuşlarına izin ver
+            if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 8 || e.keyCode === 37 || e.keyCode === 39)) {
+                e.preventDefault();
+            }
+        });
+    });
+       async function cariKontrol() {
+        let vergi_tc_kontrol = $("#vergi_tc").val();
+
+        if (!vergi_tc_kontrol || vergi_tc_kontrol.length < 10) {
+            toastr["warning"]("Cari araması yapmak için 10 ya da 11 karakter giriniz.");
+        }
+        if (vergi_tc_kontrol && vergi_tc_kontrol.length >= 10) {
+            const formdata = new FormData();
+            formdata.append("vergi_tc_kontrol", vergi_tc_kontrol);
+            await $.ajax({
+                url: "/idapi/cari-kontrol",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataSrc: "",
+                dataType: "json",
+                success: function (data, textStatus, xhr) {
+                    if (xhr.status === 200) {
+                        if (data && data[0] == "VAR") {
+                            $("#div-tutar").css("display", "block");
+                            $("#tutar").prop("disabled", false);
+                            $("#btn-frame").prop("disabled", false);
+                            toastr["success"](data[1] + " carisi bulundu, tutar giriniz.");
+                        }
+                        else {
+                            $("#div-tutar").css("display", "none");
+                            $("#tutar").prop("disabled", true);
+                            $("#btn-frame").prop("disabled", true);
+                            toastr["error"]("Cari bulunamadı!");
+                        }
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](request.responseJSON.Message);
+                }
+            });
+        }
+    };
+
+    async function iframeOlustur() {
+        let vergi_tc = $("#vergi_tc").val();
+        let tutar = $("#tutar").val();
+        if (!tutar || tutar == "0") {
+            toastr["warning"]("Tutar 0₺ olamaz.");
+        }
+        if (!vergi_tc || vergi_tc.length < 10) {
+            toastr["warning"]("Devam etmek için 10 ya da 11 karakter giriniz.");
+        }
+        if (vergi_tc && tutar && vergi_tc.length >= 10 && tutar != "0") {
+            const formdata = new FormData();
+            formdata.append("vergi_tc", vergi_tc);
+            formdata.append("tutar", tutar);
+            await $.ajax({
+                url: "/idapi/paytr-iframe",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataSrc: "",
+                dataType: "json",
+                success: function (data, textStatus, xhr) {
+
+                    if (xhr.status === 200) {
+                        if (data) {
+                            $("#cariSelect").val(0).change();
+                            toastr["success"]("Cari başarıyla seçildi, ödeme sayfası getiriliyor.");
+                            $("#cont1").css("display", "none");
+                            $("#cont2").css("display", "block");
+                            $("#paytriframe").css("display", "block");
+                            $("#paytriframe").attr("src", data[0]);
+                            $("#cariAd").html("<strong>" + data[1] + "</strong> Carisi İçin PayTR Ödeme Sayfası");
+                         
+
+                            setTimeout(function () {
+                                toastr["info"]("Seçim sayfasına dönmek için sayfayı yenileyiniz.")
+                            }, 2000);
+
+                        }
+                        else {
+                            toastr["error"]("Hata, ödeme sayfası oluşturulamadı!");
+                            $("#cont1").css("display", "block");
+                            $("#cont2").css("display", "none");
+                            $("#cariAd").html("");
+                            $("#paytriframe").css("display", "none");
+                            $("#paytriframe").removeAttr("src");
+
+                        }
+
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](request.responseJSON.Message);
+                }
+            });
+        }
+    };
+</script>

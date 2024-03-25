@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IZBMOLOZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="IDT_CARI_HAREKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CARI_KODU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TARIH" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BELGE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ACIKLAMA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BORC" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="ALACAK" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="BAKIYE" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="HAREKET_TIPI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="KAYIT_KULL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KAYIT_ZAMAN" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AKTARIM" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IDT_CARI_KAYIT" Relationship="Self.FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT" FromRole="IDT_CARI_HAREKET" ToRole="IDT_CARI_KAYIT" />
+  </EntityType>
+  <EntityType Name="IDT_CARI_KAYIT">
+    <Key>
+      <PropertyRef Name="CARI_KOD" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CARI_KOD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CARI_ISIM" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VERGI_DAIRESI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VERGI_NUMARASI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TCKIMLIKNO" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="CARI_ADRES" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CARI_IL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CARI_ILCE" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CARI_TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BAKIYE" Type="Double" />
+    <Property Name="SUBE_CARI_KOD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IDT_CARI_HAREKET" Relationship="Self.FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT" FromRole="IDT_CARI_KAYIT" ToRole="IDT_CARI_HAREKET" />
+    <NavigationProperty Name="IDT_PAYTR_ODEME_LOG" Relationship="Self.FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT" FromRole="IDT_CARI_KAYIT" ToRole="IDT_PAYTR_ODEME_LOG" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_ODEME_LOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CARI_KODU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AD_SOYAD" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TUTAR" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TELEFON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADRES" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MERCHANT_OID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IC_IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BASARILI" Type="Boolean" Nullable="false" />
+    <Property Name="TARIH" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="IDT_CARI_KAYIT" Relationship="Self.FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT" FromRole="IDT_PAYTR_ODEME_LOG" ToRole="IDT_CARI_KAYIT" />
+  </EntityType>
+  <Association Name="FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT">
+    <End Role="IDT_CARI_KAYIT" Type="Self.IDT_CARI_KAYIT" Multiplicity="1" />
+    <End Role="IDT_CARI_HAREKET" Type="Self.IDT_CARI_HAREKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDT_CARI_KAYIT">
+        <PropertyRef Name="CARI_KOD" />
+      </Principal>
+      <Dependent Role="IDT_CARI_HAREKET">
+        <PropertyRef Name="CARI_KODU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT">
+    <End Role="IDT_CARI_KAYIT" Type="Self.IDT_CARI_KAYIT" Multiplicity="1" />
+    <End Role="IDT_PAYTR_ODEME_LOG" Type="Self.IDT_PAYTR_ODEME_LOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDT_CARI_KAYIT">
+        <PropertyRef Name="CARI_KOD" />
+      </Principal>
+      <Dependent Role="IDT_PAYTR_ODEME_LOG">
+        <PropertyRef Name="CARI_KODU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IZBMOLOZEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="IDT_CARI_HAREKET" EntityType="Self.IDT_CARI_HAREKET" />
+    <EntitySet Name="IDT_CARI_KAYIT" EntityType="Self.IDT_CARI_KAYIT" />
+    <EntitySet Name="IDT_PAYTR_ODEME_LOG" EntityType="Self.IDT_PAYTR_ODEME_LOG" />
+    <AssociationSet Name="FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT" Association="Self.FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT">
+      <End Role="IDT_CARI_KAYIT" EntitySet="IDT_CARI_KAYIT" />
+      <End Role="IDT_CARI_HAREKET" EntitySet="IDT_CARI_HAREKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT" Association="Self.FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT">
+      <End Role="IDT_CARI_KAYIT" EntitySet="IDT_CARI_KAYIT" />
+      <End Role="IDT_PAYTR_ODEME_LOG" EntitySet="IDT_PAYTR_ODEME_LOG" />
+    </AssociationSet>
+    <EntitySet Name="IDT_PAYTR_KONTROL" EntityType="IZBMOLOZModel.IDT_PAYTR_KONTROL" />
+    <EntitySet Name="IDT_PAYTR_HATA_LOG" EntityType="IZBMOLOZModel.IDT_PAYTR_HATA_LOG" />
+    <EntitySet Name="IDT_PAYTR_ASAMA1" EntityType="IZBMOLOZModel.IDT_PAYTR_ASAMA1" />
+  </EntityContainer>
+  <EntityType Name="IDT_PAYTR_KONTROL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MERCHANT_OID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NET_TUTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KESINTI_TUTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KESINTI_ORAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PAYMENT_AMOUNT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RESPONSE_TARIH" Type="DateTime" Precision="0" />
+    <Property Name="CURRENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TAKSIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KART_MARKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MASKED_PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ODEME_TIPI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TEST_MODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_HATA_LOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MERCHANT_OID" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="TARIH" Type="DateTime" Precision="3" />
+    <Property Name="HATA_NOT" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="HATA_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HATA_INNER_EXCEPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PATH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_ASAMA1">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TUTAR" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AD_SOYAD" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="TELEFON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ADRES" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IC_IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CARI_KODU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MERCHANT_OID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TARIH" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

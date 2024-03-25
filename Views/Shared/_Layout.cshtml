@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İzbeton E-Tahsilat</title>
+
+    <!-- Styles -->
+
+    @Styles.Render("~/Content/bootstrap.min.css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @RenderSection("Styles", required: false)
+
+    <!-- Scripts -->
+
+    @Scripts.Render("~/Scripts/jquery-3.7.1.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @RenderSection("Scripts", required: false)
+
+    <style>
+        * {
+            font-family: 'Dosis', sans-serif !important;
+            font-size: large;
+        }
+
+        body {
+            margin: 0; /* Ekstra kenar boşlukları kaldırmak için */
+            background-image: url('../../content/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* Footer içindeki bağlantıya tıklanabilirlik sağlamak için pointer-events ayarı */
+        footer {
+            pointer-events: auto;
+            position: relative; /* footer-link elementini z-index ile yükseltmek için */
+            z-index: 10000; /* Overlay'in üzerine çıkartmak için yüksek bir z-index değeri */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <a href="https://ideaktif.com.tr/" title="İdeaktif Danışmanlık ve Yazılım web sitesine gitmek için tıkla!" target="_blank" style="text-decoration: none; font-size:0.7rem;color: #333333; background-color: none; "> &copy; İdeaktif Danışmanlık ve Yazılım Ltd. @DateTime.Now.Year</a>
+        </footer>
+    </div>
+
+</body>
+</html>

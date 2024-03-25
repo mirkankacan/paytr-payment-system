@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QRTestModelStoreContainer" CdmEntityContainer="QRTestEntities">
+    <EntitySetMapping Name="QRCodes">
+      <EntityTypeMapping TypeName="QRTestModel.QRCode">
+        <MappingFragment StoreEntitySet="QRCodes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="QRCode1" ColumnName="QRCode" />
+          <ScalarProperty Name="QRCode_Date" ColumnName="QRCode_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

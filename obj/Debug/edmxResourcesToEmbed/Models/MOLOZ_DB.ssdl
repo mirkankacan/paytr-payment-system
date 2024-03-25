@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IZBMOLOZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="IDT_CARI_HAREKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CARI_KODU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TARIH" Type="datetime" Nullable="false" />
+    <Property Name="BELGE_NO" Type="nvarchar" MaxLength="50" />
+    <Property Name="ACIKLAMA" Type="nvarchar" MaxLength="250" />
+    <Property Name="BORC" Type="money" Nullable="false" />
+    <Property Name="ALACAK" Type="money" Nullable="false" />
+    <Property Name="BAKIYE" Type="money" />
+    <Property Name="HAREKET_TIPI" Type="varchar" MaxLength="1" />
+    <Property Name="KAYIT_KULL" Type="nvarchar" MaxLength="50" />
+    <Property Name="KAYIT_ZAMAN" Type="datetime" Nullable="false" />
+    <Property Name="AKTARIM" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IDT_CARI_KAYIT">
+    <Key>
+      <PropertyRef Name="CARI_KOD" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CARI_KOD" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CARI_ISIM" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="VERGI_DAIRESI" Type="nvarchar" MaxLength="50" />
+    <Property Name="VERGI_NUMARASI" Type="nvarchar" MaxLength="50" />
+    <Property Name="TCKIMLIKNO" Type="nvarchar" MaxLength="11" />
+    <Property Name="CARI_ADRES" Type="nvarchar" MaxLength="500" />
+    <Property Name="CARI_IL" Type="nvarchar" MaxLength="150" />
+    <Property Name="CARI_ILCE" Type="nvarchar" MaxLength="150" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="CARI_TEL" Type="nvarchar" MaxLength="50" />
+    <Property Name="BAKIYE" Type="float" />
+    <Property Name="SUBE_CARI_KOD" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_ASAMA1">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="TUTAR" Type="money" />
+    <Property Name="AD_SOYAD" Type="nvarchar" MaxLength="350" />
+    <Property Name="TELEFON" Type="nvarchar" MaxLength="50" />
+    <Property Name="ADRES" Type="nvarchar" MaxLength="500" />
+    <Property Name="IC_IP" Type="nvarchar" MaxLength="50" />
+    <Property Name="CARI_KODU" Type="nvarchar" MaxLength="50" />
+    <Property Name="MERCHANT_OID" Type="nvarchar" MaxLength="50" />
+    <Property Name="TARIH" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_HATA_LOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MERCHANT_OID" Type="nvarchar" MaxLength="300" />
+    <Property Name="TARIH" Type="datetime" />
+    <Property Name="HATA_NOT" Type="nvarchar" MaxLength="200" />
+    <Property Name="HATA_MESSAGE" Type="nvarchar(max)" />
+    <Property Name="HATA_INNER_EXCEPTION" Type="nvarchar(max)" />
+    <Property Name="PATH" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_KONTROL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MERCHANT_OID" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="50" />
+    <Property Name="NET_TUTAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="KESINTI_TUTAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="KESINTI_ORAN" Type="nvarchar" MaxLength="50" />
+    <Property Name="PAYMENT_AMOUNT" Type="nvarchar" MaxLength="50" />
+    <Property Name="RESPONSE_TARIH" Type="date" />
+    <Property Name="CURRENCY" Type="nvarchar" MaxLength="50" />
+    <Property Name="TAKSIT" Type="nvarchar" MaxLength="50" />
+    <Property Name="KART_MARKA" Type="nvarchar" MaxLength="50" />
+    <Property Name="MASKED_PAN" Type="nvarchar" MaxLength="50" />
+    <Property Name="ODEME_TIPI" Type="nvarchar" MaxLength="50" />
+    <Property Name="TEST_MODE" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IDT_PAYTR_ODEME_LOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CARI_KODU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AD_SOYAD" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TUTAR" Type="money" Nullable="false" />
+    <Property Name="TELEFON" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ADRES" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="MERCHANT_OID" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IC_IP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BASARILI" Type="bit" Nullable="false" />
+    <Property Name="TARIH" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT">
+    <End Role="IDT_CARI_KAYIT" Type="Self.IDT_CARI_KAYIT" Multiplicity="1" />
+    <End Role="IDT_CARI_HAREKET" Type="Self.IDT_CARI_HAREKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDT_CARI_KAYIT">
+        <PropertyRef Name="CARI_KOD" />
+      </Principal>
+      <Dependent Role="IDT_CARI_HAREKET">
+        <PropertyRef Name="CARI_KODU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT">
+    <End Role="IDT_CARI_KAYIT" Type="Self.IDT_CARI_KAYIT" Multiplicity="1" />
+    <End Role="IDT_PAYTR_ODEME_LOG" Type="Self.IDT_PAYTR_ODEME_LOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDT_CARI_KAYIT">
+        <PropertyRef Name="CARI_KOD" />
+      </Principal>
+      <Dependent Role="IDT_PAYTR_ODEME_LOG">
+        <PropertyRef Name="CARI_KODU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IZBMOLOZModelStoreContainer">
+    <EntitySet Name="IDT_CARI_HAREKET" EntityType="Self.IDT_CARI_HAREKET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDT_CARI_KAYIT" EntityType="Self.IDT_CARI_KAYIT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDT_PAYTR_ASAMA1" EntityType="Self.IDT_PAYTR_ASAMA1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDT_PAYTR_HATA_LOG" EntityType="Self.IDT_PAYTR_HATA_LOG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDT_PAYTR_KONTROL" EntityType="Self.IDT_PAYTR_KONTROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDT_PAYTR_ODEME_LOG" EntityType="Self.IDT_PAYTR_ODEME_LOG" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT" Association="Self.FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT">
+      <End Role="IDT_CARI_KAYIT" EntitySet="IDT_CARI_KAYIT" />
+      <End Role="IDT_CARI_HAREKET" EntitySet="IDT_CARI_HAREKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT" Association="Self.FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT">
+      <End Role="IDT_CARI_KAYIT" EntitySet="IDT_CARI_KAYIT" />
+      <End Role="IDT_PAYTR_ODEME_LOG" EntitySet="IDT_PAYTR_ODEME_LOG" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

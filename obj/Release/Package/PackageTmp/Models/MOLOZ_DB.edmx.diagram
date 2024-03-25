@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0ae52d46204f4a90bd06be4bea4139e5" Name="Diagram1">
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_CARI_HAREKET" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_CARI_KAYIT" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_PAYTR_ODEME_LOG" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="IZBMOLOZModel.FK_IDT_CARI_HAREKET_IDT_CARI_KAYIT" ManuallyRouted="false" />
+        <AssociationConnector Association="IZBMOLOZModel.FK_IDT_PAYTR_ODEME_LOG_IDT_CARI_KAYIT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_PAYTR_KONTROL" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_PAYTR_HATA_LOG" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="IZBMOLOZModel.IDT_PAYTR_ASAMA1" Width="1.5" PointX="9.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

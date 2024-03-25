@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* İçeriği tam ortalamak için gerekli stiller */
+    .center-content {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .txt {
+        font-size: 2em;
+    }
+
+    .txt2 {
+        font-size: 1em;
+    }
+
+    strong {
+        font-size: 1.3em;
+    }
+</style>
+<div class="center-content">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="container-fluid content-inner py-0">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-body justify-content-center">
+                            <div class="row">
+                                <div class="col-md-12 mb-3 text-center">
+                                    <div class="alert alert-danger " role="alert">
+                                        <span class="d-block txt">
+                                            <i class="fa-regular fa-thumbs-down fa-fade fa-xl" style="color: #931515;"></i>
+                                            &nbsp;&nbsp; ÖDEME <strong>BAŞARISIZ!</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3 text-center ">
+                                    <span id="countdown" class="d-block txt2"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        localStorage.clear();
+
+        // Geri sayım göster
+        var countDown = 10; // Geri sayım süresi (saniye)
+        var countDownElement = document.getElementById("countdown");
+        countDownElement.innerHTML = "Sayfa " + countDown + " saniye sonra kapanacak...";
+
+        var countDownInterval = setInterval(function () {
+            countDown--;
+            if (countDown >= 0) {
+                countDownElement.innerHTML = "Sayfa " + countDown + " saniye sonra kapanacak...";
+            } else {
+                clearInterval(countDownInterval);
+                countDownElement.style.display = "none";
+                window.location.href = "https://etahsilat.izbeton.com.tr/odeme";
+            }
+        }, 1000);
+
+    });
+</script>
